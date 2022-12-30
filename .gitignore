@@ -1,0 +1,8 @@
+# Dataset
+dataset/
+
+# Model Binaries/Checkpoints
+*.bin
+*.xml
+*.pt
+*.onnx

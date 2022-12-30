@@ -1,0 +1,19 @@
+services:
+  inference_api:
+    image: openvino/model_server:latest
+    command: |
+      --model_name challenge2
+      --model_path /models
+      --layout NCHW:NCHW
+      --rest_port 9001
+    ports:
+      - 9001:9001
+    volumes:
+      - ./models:/models
+  
+  web_app:
+    build: web_app
+    depends_on:
+      - inference_api
+    ports:
+      - 8080:8080
