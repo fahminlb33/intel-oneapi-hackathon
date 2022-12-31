@@ -1,0 +1,6 @@
+,action,elapsed
+0,load_dataset,16.809248447418213
+1,prepare_dataset,0.8701415061950684
+2,train_test_split,1.8145272731781006
+3,training,33.78727078437805
+4,evaluation,0.10779976844787598

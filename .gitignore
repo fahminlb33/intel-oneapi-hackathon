@@ -3,6 +3,18 @@ dataset/
 
 # Model Binaries/Checkpoints
 *.bin
-*.xml
 *.pt
 *.onnx
+
+# Local YOLOv5
+yolov5/
+
+# MLRuns
+mlruns
+
+# Python
+__pycache__
+.ipynb_checkpoints
+
+# Binaries
+challenge2/models
