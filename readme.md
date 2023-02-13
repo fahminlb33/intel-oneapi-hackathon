@@ -1,19 +1,12 @@
-To use Intel oneDNN
-TF_ENABLE_ONEDNN_OPTS=1 
+# Intel® oneAPI Hackathon for Open Innovation
 
------------------- dataset cropweed
+By: Kodesiana (Fahmi Noor Fiqri)
 
-0 crop
-1 weed
+You can find the specific documentation and how-to in the specific challenge directory.
 
-satu row dari txt
-1 0.503906 0.416992 0.691406 0.685547
-[class] (x1, y1) (x2, y2)
+* [Challenge 1 - Machine Learning Challenge Track: Predict the quality of freshwater](./challenge1)
+* [Challenge 2 - Computer Vision Challenge Track: Target and Eliminate](./challenge2)
 
-----------
+## License
 
-python train.py --img 640 --epochs 20 --data ../dataset/cropweed/dataset.yaml --batch 24 --device cpu --weights ../dataset/cropweed/yolov5s.pt --cache ram
-
-
-python export.py --weights ../challenge2/models/ipex/best_ipex.pt --include onnx openvino
-
+Licensed under Apache License 2.0
