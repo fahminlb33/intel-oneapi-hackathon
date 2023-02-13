@@ -6,14 +6,20 @@ services:
       --model_path /models
       --layout NCHW:NCHW
       --rest_port 9001
+      --port 9000
     ports:
+      - 9000:9000
       - 9001:9001
     volumes:
-      - ./models:/models
+      - ./models:/models:ro
   
-  web_app:
-    build: web_app
+  app_web:
+    build: app_web
     depends_on:
       - inference_api
+    environment:
+      - PORT=8080
+      - API_URL=http://inference_api:9001
+      - MODEL_NAME=challenge2
     ports:
       - 8080:8080
