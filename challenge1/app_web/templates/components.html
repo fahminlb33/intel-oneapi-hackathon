@@ -1,0 +1,62 @@
+{% macro create_input(name, placeholder='', icon='') -%}
+<div class="field">
+    <p class="control has-icons-left">
+        <input name="{{ name }}" class="input" type="number" placeholder="{{ placeholder }}" step="any" required>
+        <span class="icon is-small is-left">
+            <i class="{{ icon }}"></i>
+        </span>
+    </p>
+</div>
+{%- endmacro %}
+
+{% macro create_input_color(name, placeholder='', icon='') -%}
+<div class="field">
+    <p class="control has-icons-left">
+        <span class="select is-fullwidth">
+            <select name="{{ name }}" required>
+                <option value="0">Yellow</option>
+                <option value="1">Light Yellow</option>
+                <option value="2">Faint Yellow</option>
+                <option value="3">Near Colorless</option>
+                <option value="4">Colorless</option>
+            </select>
+        </span>
+        <span class="icon is-small is-left">
+            <i class="{{ icon }}"></i>
+        </span>
+    </p>
+</div>
+{%- endmacro %}
+
+{% macro create_input_source(name, placeholder='', icon='') -%}
+<div class="field">
+    <p class="control has-icons-left">
+        <span class="select is-fullwidth">
+            <select name="{{ name }}" required>
+                <option value="0">Lake</option>
+                <option value="1">Spring</option>
+                <option value="2">River</option>
+                <option value="3">Reservoir</option>
+                <option value="4">Aquifer</option>
+                <option value="5">Well</option>
+                <option value="6">Ground</option>
+                <option value="7">Stream</option>
+            </select>
+        </span>
+        <span class="icon is-small is-left">
+            <i class="{{ icon }}"></i>
+        </span>
+    </p>
+</div>
+{%- endmacro %}
+
+{% macro create_input_date(name, placeholder='', icon='') -%}
+<div class="field">
+    <p class="control has-icons-left">
+        <input name="{{ name }}" class="input" type="datetime-local" placeholder="{{ placeholder }}" required>
+        <span class="icon is-small is-left">
+            <i class="{{ icon }}"></i>
+        </span>
+    </p>
+</div>
+{%- endmacro %}

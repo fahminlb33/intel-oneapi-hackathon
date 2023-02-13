@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% import "components.html" as components %}
+
+{% block content %}
+<div>
+    <form id="prediction-form" action="/prediction" method="post">
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <h5 class="title is-5">Data Collection Info</h5>
+                {{ components.create_input_date("date", placeholder="Date", icon="fa-solid fa-calendar") }}
+            </div>
+        </div>
+
+        <div class="columns mt-4">
+            <div class="column">
+                <h5 class="title is-5">Chemical Properties</h5>
+                <div class="columns">
+                    <div class="column">
+                        {{ components.create_input("ph", placeholder="pH", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("iron", placeholder="Iron", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("nitrate", placeholder="Nitrate", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("chloride", placeholder="Chloride", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("lead", placeholder="Lead", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("zinc", placeholder="Zinc", icon="fa-solid fa-flask") }}
+                    </div>
+                    <div class="column">
+                        {{ components.create_input("fluoride", placeholder="Fluoride", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("copper", placeholder="Copper", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("sulfate", placeholder="Sulfate", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("chlorine", placeholder="Chlorine", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("manganese", placeholder="Manganese", icon="fa-solid fa-flask") }}
+                        {{ components.create_input("odor", placeholder="Odor", icon="fa-solid fa-droplet") }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <h5 class="title is-5">Physical Properties</h5>
+                <div class="columns">
+                    <div class="column">
+                        {{ components.create_input_color("color", placeholder="Color", icon="fa-solid fa-droplet") }}
+                        {{ components.create_input_source("source", placeholder="Source", icon="fa-solid fa-droplet") }}
+                        {{ components.create_input("turbidity", placeholder="Turbidity", icon="fa-solid fa-droplet") }}
+                    </div>
+                    <div class="column">
+                        {{ components.create_input("conductivity", placeholder="Conductivity", icon="fa-solid fa-droplet") }}
+                        {{ components.create_input("total_dissolved_solids", placeholder="Total Dissolved Solids", icon="fa-solid
+                        fa-droplet") }}
+                    </div>
+                </div>
+
+                <h6 class="title is-6">Temperature</h6>
+                <div class="columns">
+                    <div class="column">
+                        {{ components.create_input("air_temperature", placeholder="Air Temperature", icon="fa-solid
+                        fa-thermometer") }}
+                    </div>
+                    <div class="column">
+                        {{ components.create_input("water_temperature", placeholder="Water Temperature", icon="fa-solid
+                        fa-thermometer") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control mt-5">
+            <button id="submit-btn" class="button is-primary">
+                <span class="icon is-small">
+                    <i class="fa-solid fa-bolt"></i>
+                </span>
+                <span>Run Prediction</span>
+            </button>
+            <a href="/summary" class="button is-info">
+                <span class="icon is-small">
+                    <i class="fa-solid fa-chart-simple"></i>
+                </span>
+                <span>Summary</span>
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
