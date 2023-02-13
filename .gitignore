@@ -6,9 +6,6 @@ dataset/
 *.pt
 *.onnx
 
-# Local YOLOv5
-yolov5/
-
 # MLRuns
 mlruns
 
@@ -16,5 +13,8 @@ mlruns
 __pycache__
 .ipynb_checkpoints
 
-# Binaries
-challenge2/models
+# ---- Challenge 1
+
+# Run history
+challenge1/runs
+
