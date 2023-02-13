@@ -95,7 +95,7 @@ TIME_HISTORY.append({
     "elapsed": time.time() - start_time
 })
 
-logging.debug(f"Used columns: {df.columns}")
+logging.info(f"Used columns: {df.columns}")
 
 # ---- step 3: data splitting
 logging.info("Splitting...")

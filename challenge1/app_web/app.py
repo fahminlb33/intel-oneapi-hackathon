@@ -34,6 +34,11 @@ def index():
     return render_template("form_inputs.html")
 
 
+@app.route("/summary")
+def summary():
+    return render_template("summary.html")
+
+
 @app.route("/prediction", methods=["POST"])
 def prediction():
     pred_date = datetime.strptime(request.form["date"], '%Y-%m-%dT%H:%M')
@@ -74,9 +79,18 @@ def prediction():
                            probability=probability)
 
 
-@app.route("/summary")
-def summary():
-    return render_template("summary.html")
+@app.route("/predict", methods=["POST"])
+def predict_json():
+    data = request.get_json()
+    pred_data = np.array(list(data.values())).astype(np.float64).reshape(1, -1)
+    preds = predictor.compute(pred_data, model)
+
+    result = {}
+    for i, key in enumerate(data.keys()):
+        result[key] = preds.probabilities[i].tolist()
+
+    print(result)
+    return result
 
 
 if __name__ == "__main__":

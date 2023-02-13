@@ -16,3 +16,64 @@ XGBOOST_PARAMS = {
     "skip_drop": 0.26622177133895697,
     "subsample": 0.5974172526635755,
 }
+
+COLOR_MAP = {
+    "Yellow": 0,
+    "Light Yellow": 1,
+    "Faint Yellow": 2,
+    "Near Colorless": 3,
+    "Colorless": 4
+}
+
+SOURCE_MAP = {
+    "Lake": 0,
+    "Spring": 1,
+    "River": 2,
+    "Reservoir": 3,
+    "Aquifer": 4,
+    "Well": 5,
+    "Ground": 6,
+    "Stream": 7,
+}
+
+MONTH_MAP = {
+    "January": 0,
+    "February": 1,
+    "March": 2,
+    "April": 3,
+    "May": 4,
+    "June": 5,
+    "July": 6,
+    "August": 7,
+    "September": 8,
+    "October": 9,
+    "November": 10,
+    "December": 11
+}
+
+LOAD_COLUMNS = [
+    "Index",
+    "ph",
+    "iron",
+    "nitrate",
+    "chloride",
+    "lead",
+    "zinc",
+    "color",
+    "turbidity",
+    "fluoride",
+    "copper",
+    "odor",
+    "sulfate",
+    "conductivity",
+    "chlorine",
+    "manganese",
+    "total_dissolved_solids",
+    "source",
+    "water_temperature",
+    "air_temperature",
+    "month",
+    "day",
+    "time_of_day",
+    "target",
+]
