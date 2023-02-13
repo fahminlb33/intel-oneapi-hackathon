@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     study = optuna.create_study(study_name="xgboost",
                                 directions=["maximize", "maximize"],
-                                storage="sqlite:///xgboost.db",
+                                storage="sqlite:///xgboost-history.db",
                                 load_if_exists=True)
 
     study.optimize(objective, n_trials=50, callbacks=[mlflc])
