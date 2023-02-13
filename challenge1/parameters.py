@@ -1,10 +1,9 @@
 XGBOOST_PARAMS = {
     "objective": "binary:logistic",
-    
     "alpha": 0.0005072707539427799,
     "booster": "dart",
     "colsample_bytree": 0.9634270709794632,
-    "eta": 	9.843453637361607e-07,
+    "eta": 9.843453637361607e-07,
     "eval_metric": "auc",
     "gamma": 0.016649678927282842,
     "grow_policy": "depthwise",
