@@ -10,6 +10,11 @@ const waterSourceChart = new ApexCharts(document.querySelector("#chart-water-sou
     },
     series: [],
     labels: [],
+    theme: {
+        monochrome: {
+            enabled: true
+        }
+    },
     tooltip: {
         x: {
             show: false

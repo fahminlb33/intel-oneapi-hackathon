@@ -1,7 +1,7 @@
-// render water color chart
-const waterColorChart = new ApexCharts(document.querySelector("#chart-water-color"), {
+// render water quality chart
+const waterQualityChart = new ApexCharts(document.querySelector("#chart-water-quality"), {
     title: {
-        text: 'Water Color',
+        text: 'Water Quality',
         align: 'left'
     },
     chart: {
@@ -10,7 +10,7 @@ const waterColorChart = new ApexCharts(document.querySelector("#chart-water-colo
     },
     series: [],
     labels: [],
-    colors: ["#FEB019", "#F9CE1D", "#F9C80E", "#03A9F4", "#008FFB"],
+    colors: ['#00E396', '#FF4560'],
     tooltip: {
         x: {
             show: false
@@ -22,12 +22,12 @@ const waterColorChart = new ApexCharts(document.querySelector("#chart-water-colo
         }
     },
 });
-waterColorChart.render();
+waterQualityChart.render();
 
 // fetch the data asynchronously
-fetch("/assets/data/water-color.json").then(response => {
+fetch("/assets/data/water-quality.json").then(response => {
     response.json().then(data => {
-        waterColorChart.updateSeries(data.data);
-        waterColorChart.updateOptions({ labels: data.index });
+        waterQualityChart.updateSeries(data.data);
+        waterQualityChart.updateOptions({ labels: data.index });
     });
 });
