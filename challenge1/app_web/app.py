@@ -31,7 +31,8 @@ FEATURE_NAMES = [
 
 @app.route("/")
 def index():
-    return render_template("form_inputs.html")
+    show_app_menu = os.environ.get("SHOW_APP_MENU", "true").lower() == "true"
+    return render_template("form_inputs.html", show_app_menu=show_app_menu)
 
 
 @app.route("/summary")

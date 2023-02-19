@@ -65,7 +65,7 @@
         </div>
 
         <div class="control mt-5">
-            <button id="submit-btn" class="button is-primary">
+            <button id="submit-btn" class="button is-primary mr-2">
                 <span class="icon is-small">
                     <i class="fa-solid fa-bolt"></i>
                 </span>
@@ -77,6 +77,14 @@
                 </span>
                 <span>Summary</span>
             </a>
+            {% if show_app_menu %}
+            <a href="http://localhost:8000" class="button is-info">
+                <span class="icon is-small">
+                    <i class="fa-solid fa-house"></i>
+                </span>
+                <span>Back to App Menu</span>
+            </a>
+            {% endif %}
         </div>
     </form>
 </div>
