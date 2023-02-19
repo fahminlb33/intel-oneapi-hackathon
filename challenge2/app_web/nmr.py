@@ -1,12 +1,13 @@
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
-image_size = 640
-conf_thres=0.25
-iou_thres=0.45
-names = ["crop", "weed"]
+IMAGE_SIZE = 640
+IOU_THRESHOLD = 0.45
+CONFIDENCE_THRESHOLD = 0.25
+CLASS_NAMES = ["crop", "weed"]
 
 # https://github.com/quoctoann3/yolov5_to_tflite_inference
+
 
 def xywh2xyxy(x):
     # Convert nx4 boxes from [x, y, w, h] to [x1, y1, x2, y2] where xy1=top-left, xy2=bottom-right
@@ -17,7 +18,8 @@ def xywh2xyxy(x):
     y[:, 3] = x[:, 1] + x[:, 3] / 2  # bottom right y
     return y
 
-def non_max_suppression(boxes, scores, threshold):	
+
+def non_max_suppression(boxes, scores, threshold):
     assert boxes.shape[0] == scores.shape[0]
     # bottom-left origin
     ys1 = boxes[:, 0]
@@ -34,7 +36,8 @@ def non_max_suppression(boxes, scores, threshold):
         boxes_keep_index.append(index)
         if not len(scores_indexes):
             break
-        ious = compute_iou(boxes[index], boxes[scores_indexes], areas[index], areas[scores_indexes])
+        ious = compute_iou(boxes[index], boxes[scores_indexes], areas[index],
+                           areas[scores_indexes])
         filtered_indexes = set((ious > threshold).nonzero()[0])
         # if there are no more scores_index
         # then we should pop it
@@ -75,22 +78,46 @@ def compute_iou(box, boxes, box_area, boxes_area):
     ious = intersections / unions
     return ious
 
+
+def clip_coords(boxes, img_shape):
+    # Clip bounding xyxy bounding boxes to image shape (height, width)
+
+    boxes[:, 0].clip(0, img_shape[1], out=boxes[:, 0])  # x1
+    boxes[:, 1].clip(0, img_shape[0], out=boxes[:, 1])  # y1
+    boxes[:, 2].clip(0, img_shape[1], out=boxes[:, 2])  # x2
+    boxes[:, 3].clip(0, img_shape[0], out=boxes[:, 3])  # y2
+
+
+def letterbox_image(image, size):
+    iw, ih = image.size
+    w, h = size
+    scale = min(w / iw, h / ih)
+    nw = int(iw * scale)
+    nh = int(ih * scale)
+
+    image = image.resize((nw, nh), Image.BICUBIC)
+    new_image = Image.new('RGB', size, (128, 128, 128))
+    new_image.paste(image, ((w - nw) // 2, (h - nh) // 2))
+    return new_image
+
+
 def nms(prediction):
-    prediction = prediction[prediction[...,4] > conf_thres]
-    
+    prediction = prediction[prediction[..., 4] > CONFIDENCE_THRESHOLD]
+
     # Box (center x, center y, width, height) to (x1, y1, x2, y2)
     boxes = xywh2xyxy(prediction[:, :4])
-    res = non_max_suppression(boxes,prediction[:,4],iou_thres)
-    
+    res = non_max_suppression(boxes, prediction[:, 4], IOU_THRESHOLD)
+
     result_boxes = []
     result_scores = []
     result_class_names = []
     for r in res:
         result_boxes.append(boxes[r])
-        result_scores.append(prediction[r,4])
-        result_class_names.append(names[np.argmax(prediction[r,5:])])
+        result_scores.append(prediction[r, 4])
+        result_class_names.append(CLASS_NAMES[np.argmax(prediction[r, 5:])])
 
     return result_boxes, result_scores, result_class_names
+
 
 def scale_coords(img1_shape, coords, img0_shape, ratio_pad=None):
     # Rescale coords (xyxy) from img1_shape to img0_shape
@@ -105,25 +132,41 @@ def scale_coords(img1_shape, coords, img0_shape, ratio_pad=None):
     coords[:, [0, 2]] -= pad[0]  # x padding
     coords[:, [1, 3]] -= pad[1]  # y padding
     coords[:, :4] /= gain
+
     clip_coords(coords, img0_shape)
-    return coords
 
-def clip_coords(boxes, img_shape):
-    # Clip bounding xyxy bounding boxes to image shape (height, width)
+    return np.array(coords, dtype=int)
 
-    boxes[:, 0].clip(0, img_shape[1], out=boxes[:, 0])  # x1
-    boxes[:, 1].clip(0, img_shape[0], out=boxes[:, 1])  # y1
-    boxes[:, 2].clip(0, img_shape[1], out=boxes[:, 2])  # x2
-    boxes[:, 3].clip(0, img_shape[0], out=boxes[:, 3])  # y2
 
-def letterbox_image(image, size):
-        iw, ih = image.size
-        w, h = size
-        scale = min(w / iw, h / ih)
-        nw = int(iw * scale)
-        nh = int(ih * scale)
+def draw_boxes(img, result_boxes, result_scores, result_class_names):
+    # scale boxes
+    original_size = img.size[:2]
+    result_boxes = scale_coords((IMAGE_SIZE, IMAGE_SIZE),
+                                np.array(result_boxes),
+                                (original_size[1], original_size[0]))
 
-        image = image.resize((nw, nh), Image.BICUBIC)
-        new_image = Image.new('RGB', size, (128, 128, 128))
-        new_image.paste(image, ((w - nw) // 2, (h - nh) // 2))
-        return new_image
+    # create image drawing object
+    img_draw = ImageDraw.Draw(img, "RGBA")
+
+    # draw boxes
+    for i, r in enumerate(result_boxes):
+        # draw rectangle
+        rect_start = (r[0], r[1])
+        rect_end = (r[2], r[3])
+        img_draw.rectangle((rect_start, rect_end),
+                           fill=None,
+                           outline="red",
+                           width=2)
+
+        # draw text
+        text_org = (r[0], r[1] - 18)
+        text_content = f"{result_class_names[i]}: {100*result_scores[i]:.2f}%"
+        img_draw.text(text_org,
+                      text_content,
+                      font=ImageFont.truetype("Lato-Black.ttf", size=14),
+                      stroke_fill="black",
+                      stroke_width=2,
+                      fill="white")
+
+    # save image
+    return img

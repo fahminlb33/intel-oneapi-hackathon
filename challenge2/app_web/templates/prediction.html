@@ -9,6 +9,10 @@
         <span>Back to Prediction</span>
     </a>
 
+    {% if not image %}
+    <p class="has-background-success has-text-white has-text-centered is-size-2 mb-6">NO DETECTION</p>
+    {% endif %}
+
     <figure>
         <img src="data:image/jpeg;base64,{{ image }}" />
     </figure>

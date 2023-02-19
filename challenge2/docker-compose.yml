@@ -19,7 +19,7 @@ services:
       - inference_api
     environment:
       - PORT=8080
-      - API_URL=http://inference_api:9001
+      - API_HOST=http://inference_api:9001
       - MODEL_NAME=challenge2
     ports:
       - 8080:8080
