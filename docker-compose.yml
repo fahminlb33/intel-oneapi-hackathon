@@ -1,0 +1,39 @@
+services:
+  inference_api:
+    image: openvino/model_server:latest
+    command: |
+      --model_name challenge2
+      --model_path /models
+      --layout NCHW:NCHW
+      --rest_port 9001
+      --port 9000
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - "./challenge2/models:/models:ro"
+  
+  freshwater_app_web:
+    build: challenge1/app_web
+    ports:
+      - 8001:8001
+    environment:
+      - PORT=8001
+      - SHOW_APP_MENU=true
+
+  cropweed_app_web:
+    build: challenge2/app_web
+    ports:
+      - 8002:8002
+    depends_on:
+      - inference_api
+    environment:
+      - PORT=8002
+      - API_HOST=http://inference_api:9001
+      - MODEL_NAME=challenge2
+      - SHOW_APP_MENU=true
+
+  main_web_app:
+    build: main
+    ports:
+      - 8000:80
