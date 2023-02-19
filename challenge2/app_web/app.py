@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    show_app_menu = os.environ.get("SHOW_APP_MENU", "true").lower() == "true"
+    show_app_menu = os.environ.get("SHOW_APP_MENU", "false").lower() == "true"
     return render_template("upload.html", show_app_menu=show_app_menu)
 
 
