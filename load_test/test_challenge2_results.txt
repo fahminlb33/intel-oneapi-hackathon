@@ -1,0 +1,35 @@
+(oneapi) $ k6 run test_challenge2.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: test_challenge2.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 20 max VUs, 1m30s max duration (incl. graceful stop):
+           * default: 20 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+running (1m08.4s), 00/20 VUs, 140 complete and 0 interrupted iterations
+default ✓ [======================================] 20 VUs  1m0s
+
+     data_received..................: 11 MB 160 kB/s
+     data_sent......................: 10 MB 152 kB/s
+     http_req_blocked...............: avg=260.33µs min=80.3µs  med=226.35µs max=3.64ms p(90)=313.98µs p(95)=406.43µs
+     http_req_connecting............: avg=150.69µs min=32.8µs  med=130.05µs max=3.24ms p(90)=154.62µs p(95)=170.42µs
+     http_req_duration..............: avg=8.21s    min=5.4s    med=7.88s    max=14.52s p(90)=9.33s    p(95)=12.33s
+       { expected_response:true }...: avg=8.21s    min=5.4s    med=7.88s    max=14.52s p(90)=9.33s    p(95)=12.33s
+     http_req_failed................: 0.00% ✓ 0        ✗ 140
+     http_req_receiving.............: avg=514.46µs min=211.8µs med=425.95µs max=1.56ms p(90)=800.24µs p(95)=1.1ms
+     http_req_sending...............: avg=378.36µs min=84.1µs  med=155.05µs max=4.36ms p(90)=779.73µs p(95)=1.11ms
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s     p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=8.21s    min=5.4s    med=7.87s    max=14.51s p(90)=9.33s    p(95)=12.33s
+     http_reqs......................: 140   2.046651/s
+     iteration_duration.............: avg=9.21s    min=6.4s    med=8.88s    max=15.52s p(90)=10.34s   p(95)=13.33s
+     iterations.....................: 140   2.046651/s
+     vus............................: 2     min=2      max=20
+     vus_max........................: 20    min=20     max=20
