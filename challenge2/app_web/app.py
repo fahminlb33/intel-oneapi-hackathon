@@ -50,7 +50,16 @@ def prediction():
     img_annotated.save(buffered, format="JPEG")
     img_base64 = base64.b64encode(buffered.getvalue()).decode('utf8')
 
-    return render_template("prediction.html", image=img_base64)
+    # create list of boxes
+    found_items = []
+    for i, r in enumerate(result_boxes):
+        found_items.append({
+            "rect": "({:.2f}, {:.2f}), ({:.2f}, {:.2f})".format(r[0], r[1], r[2], r[3]),
+            "prediction": result_class_names[i],
+            "confidence": "{:.2f}%".format(100 * result_scores[i])
+        })
+        
+    return render_template("prediction.html", image=img_base64, found_items=found_items)
 
 
 @app.route("/predict", methods=["POST"])
@@ -92,4 +101,4 @@ def prediction_api():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8002)), debug=True)

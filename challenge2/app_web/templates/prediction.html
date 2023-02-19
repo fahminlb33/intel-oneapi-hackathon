@@ -16,6 +16,21 @@
     <figure>
         <img src="data:image/jpeg;base64,{{ image }}" />
     </figure>
+
+    {% if image %}
+    <div class="content mt-6">
+        <h5>Detected boxes:</h5>
+        <ol type="1">
+            {% for item in found_items %}
+            <li>
+                <span class="has-text-weight-bold">{{ item.prediction }}</span>
+                <span class="has-text-grey-light">{{ item.confidence }}</span><br/>
+                <span>{{ item.rect }} </span>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
 
