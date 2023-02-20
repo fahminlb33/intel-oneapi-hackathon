@@ -1,0 +1,6 @@
+Flask
+Jinja2
+requests
+numpy
+pillow
+openvino-dev

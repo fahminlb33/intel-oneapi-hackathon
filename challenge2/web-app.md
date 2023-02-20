@@ -22,11 +22,11 @@ $ bash download_model.sh # optional
 $ docker-compose up
 ```
 
-After you run the compose command, you can access the web app at http://localhost:8080. One more notice: port 9000 (OpenVINO gRPC), 9001 (OpenVINO REST), and 8080 (Flask web app) are required to run run the app, if those port are already used, the docker compose will not start.
+After you run the compose command, you can access the web app at http://localhost:8002. One more notice: port 9000 (OpenVINO gRPC), 9001 (OpenVINO REST), and 8002 (Flask web app) are required to run run the app, if those port are already used, the docker compose will not start.
 
 ### Making Predictions
 
-Open the web app at http://localhost:8080, then you will be presented with a single upload button.
+Open the web app at http://localhost:8002, then you will be presented with a single upload button.
 
 ![](./assets/wda1.png)
 
@@ -47,7 +47,7 @@ You can use Postman like this,
 Or this cURL command,
 
 ```bash
-curl --location 'http://localhost:8080/predict' --form 'file=@"agri_0_39.jpeg"'
+curl --location 'http://localhost:8002/predict' --form 'file=@"agri_0_39.jpeg"'
 ```
 
 The response will be an image with status code of 200 OK and MIME type of `image/jpeg` when at least one detection is found, and it will return 204 No Content when no bounding box is found.

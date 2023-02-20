@@ -18,8 +18,8 @@ services:
     depends_on:
       - inference_api
     environment:
-      - PORT=8080
+      - PORT=8002
       - API_HOST=http://inference_api:9001
       - MODEL_NAME=challenge2
     ports:
-      - 8080:8080
+      - 8002:8002
