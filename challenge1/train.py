@@ -26,7 +26,7 @@ parser.add_argument("--model-format",
                     choices=["json", "ubj", "daal4py"],
                     help="Select which model format to use")
 parser.add_argument(
-    "--model-best",
+    "--best-params",
     action='store_true',
     help="Use best parameters defined in parameters.py for training")
 parser.add_argument("--dataset",
@@ -44,7 +44,7 @@ args = parser.parse_args()
 
 logging.info(f"Using backend: {args.backend}")
 logging.info(f"Using model format: {args.model_format}")
-logging.info(f"Using best parameters: {args.model_best}")
+logging.info(f"Using use best parameters: {args.best_params}")
 logging.info(f"Using dataset: {args.dataset}")
 logging.info(f"Using output directory: {args.output}")
 
@@ -123,7 +123,7 @@ start_time = time.time()
 
 # create parameters
 train_params = {"objective": "binary:logistic"}
-if args.model_best:
+if args.best_params:
     train_params = {**train_params, **XGBOOST_PARAMS}
 
 if args.backend == "gpu":
