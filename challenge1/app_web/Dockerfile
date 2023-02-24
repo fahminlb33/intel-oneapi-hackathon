@@ -8,6 +8,11 @@ RUN pip3 install -r requirements.txt
 
 COPY . /app
 
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends curl; \
+	rm -rf /var/lib/apt/lists/*
+
 EXPOSE 8001
 
-CMD ["gunicorn", "-b 0.0.0.0:8001", "-w 4", "app:app"]
+CMD ["gunicorn", "--log-level", "debug", "--bind", "0.0.0.0:8001", "--workers", "4", "app:app"]

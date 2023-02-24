@@ -3,7 +3,7 @@
 {% block content %}
 <div class="mt-4">
     <p class="mb-2">Data summarized using Modin</p>
-    <a href="/" class="button is-primary mb-6">
+    <a href="{{ url_for('index') }}" class="button is-primary mb-6">
         <span class="icon is-small">
             <i class="fa-solid fa-arrow-left"></i>
         </span>
@@ -63,9 +63,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.0/apexcharts.min.js"
     integrity="sha512-RLWwcf0Pb2NghIfkaQms354xRV36EYjXLWKSN8QHiHqNq3KGj0DjMc9D1zzO7UsREkGU/xCLAJi/hVcKSuZ5Cw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/assets/js/chart_water_color.js"></script>
-<script src="/assets/js/chart_water_source.js"></script>
-<script src="/assets/js/chart_water_quality.js"></script>
-<script src="/assets/js/chart_chemicals.js"></script>
-<script src="/assets/js/chart_physical.js"></script>
+<script src="{{ url_for('static', filename='js/chart_water_color.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chart_water_source.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chart_water_quality.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chart_chemicals.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chart_physical.js') }}"></script>
 {% endblock %}

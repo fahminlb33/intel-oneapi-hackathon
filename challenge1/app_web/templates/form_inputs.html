@@ -4,7 +4,7 @@
 
 {% block content %}
 <div>
-    <form id="prediction-form" action="/prediction" method="post">
+    <form id="prediction-form" action="{{ url_for('prediction') }}" method="post">
         <div class="columns">
             <div class="column is-one-fifth">
                 <h5 class="title is-5">Data Collection Info</h5>
@@ -71,14 +71,14 @@
                 </span>
                 <span>Run Prediction</span>
             </button>
-            <a href="/summary" class="button is-info">
+            <a href="{{ url_for('summary') }}" class="button is-info">
                 <span class="icon is-small">
                     <i class="fa-solid fa-chart-simple"></i>
                 </span>
                 <span>Summary</span>
             </a>
             {% if show_app_menu %}
-            <a href="http://localhost:8000" class="button is-info">
+            <a href="{{ app_root_url }}" class="button is-info">
                 <span class="icon is-small">
                     <i class="fa-solid fa-house"></i>
                 </span>
