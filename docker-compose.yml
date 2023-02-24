@@ -20,6 +20,12 @@ services:
     environment:
       - PORT=8001
       - SHOW_APP_MENU=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://freshwater_app_web:8001"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 
   cropweed_app_web:
     build: challenge2/app_web
@@ -32,6 +38,12 @@ services:
       - API_HOST=http://inference_api:9001
       - MODEL_NAME=challenge2
       - SHOW_APP_MENU=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://cropweed_app_web:8002"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 
   main_web_app:
     build: main
