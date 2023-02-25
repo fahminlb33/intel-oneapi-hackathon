@@ -58,8 +58,12 @@ The response will be an image with status code of 200 OK and MIME type of `image
 
 The test is performed using the `load_test/test_challenge2.js` on the same PC that runs the server. This is not ideal but can be used roughly to estimate the overall API throughput. The test is performed using K6 with 20 VU for one minute.
 
-| Average | Minimum | Median | Maximum | P(90) | P(95) | Throughput | Total Request |
-|---------|---------|--------|---------|-------|-------|------------|---------------|
-| 8.21s   | 5.4s    | 7.88s  | 14.52s  | 9.33s | 12.33s| 2.047/s    | 140           |
+| Scenario                | Average | Minimum | Median | Maximum | P(90) | P(95) | Throughput | Total Request |
+|-------------------------|---------|---------|--------|---------|-------|-------|------------|---------------|
+| OpenVINO REST           | 2.48s   | 1.03s   | 2.49s  | 4.26s   | 3.06s | 3.26s | 5.525/s    | 348           |
+| Web API + OpenVINO REST | 8.21s   | 5.4s    | 7.88s  | 14.52s  | 9.33s | 12.33s| 2.047/s    | 140           |
+| Web API + OpenVINO gRPC | 3.24s   | 1s      | 3.32s  | 4.65s   | 3.77s | 3.95s | 4.581/s    | 293           |
 
-An average of 8.2s per inference is not a good performance but this is expected since there are some preprocessing and I used the REST API instead of the gRPC API. But for prototype, I guess this is okay.
+UPDATE:
+
+After I reimplemented the prediction using the gRPC protocol (using the `ovmsclient` package) the web app API gains a massive boost from on average of 8.21s per inference down to 3.24s per inference, that's about 60.53% of boost. Upon further inspection on the load test results, the main drawback of the REST API is the used JSON format for image data representation, a single prediction requires the client to process about 25 MB of data! (And the total data processed for the load test is 8.6 GB). This inefficient data transfer and the slow parsing of JSON can be avoided using gRPC + Protobuf format, which makes the API much faster.

@@ -6,10 +6,10 @@ from PIL import Image
 from flask import Flask, request, render_template, send_file
 
 import nmr as nmr
-import predictor as predictor
+from predictor import Predictor
 
 app = Flask(__name__)
-
+predictor = Predictor()
 
 @app.route("/")
 def index():
@@ -30,7 +30,7 @@ def prediction():
     img = predictor.preprocess(img)
 
     # send request to OpenVINO Serving
-    pred_result = predictor.request_prediction(img)
+    pred_result = predictor.request_prediction_grpc(img)
 
     # get the prediction
     result_boxes, result_scores, result_class_names = nmr.nms(pred_result)
@@ -75,7 +75,7 @@ def prediction_api():
     img = predictor.preprocess(img)
 
     # send request to OpenVINO Serving
-    pred_result = predictor.request_prediction(img)
+    pred_result = predictor.request_prediction_grpc(img)
 
     # get the prediction
     result_boxes, result_scores, result_class_names = nmr.nms(pred_result)
@@ -102,4 +102,4 @@ def prediction_api():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8002)), debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8002)))

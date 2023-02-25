@@ -1,0 +1,35 @@
+(oneapi) $ k6 run test_challenge2_vino.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: test_challenge2_vino.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 20 max VUs, 1m30s max duration (incl. graceful stop):
+           * default: 20 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+running (1m03.0s), 00/20 VUs, 348 complete and 0 interrupted iterations
+default ✓ [======================================] 20 VUs  1m0s
+
+     data_received..................: 804 MB 13 MB/s
+     data_sent......................: 8.6 GB 136 MB/s
+     http_req_blocked...............: avg=3.22ms   min=5.2µs    med=7.6µs    max=150.99ms p(90)=11.13µs  p(95)=210.2µs
+     http_req_connecting............: avg=227.33µs min=0s       med=0s       max=57.7ms   p(90)=0s       p(95)=67.88µs
+     http_req_duration..............: avg=2.48s    min=1.03s    med=2.49s    max=4.26s    p(90)=3.06s    p(95)=3.26s
+       { expected_response:true }...: avg=2.48s    min=1.03s    med=2.49s    max=4.26s    p(90)=3.06s    p(95)=3.26s
+     http_req_failed................: 0.00%  ✓ 0        ✗ 348
+     http_req_receiving.............: avg=49.94ms  min=9.88ms   med=46.26ms  max=168.11ms p(90)=80.51ms  p(95)=94.89ms
+     http_req_sending...............: avg=305.02ms min=88.21ms  med=261.71ms max=930.05ms p(90)=499.61ms p(95)=777.28ms
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=2.13s    min=711.48ms med=2.13s    max=3.27s    p(90)=2.61s    p(95)=2.74s
+     http_reqs......................: 348    5.525392/s
+     iteration_duration.............: avg=3.53s    min=2.23s    med=3.52s    max=5.98s    p(90)=4.17s    p(95)=4.33s
+     iterations.....................: 348    5.525392/s
+     vus............................: 10     min=10     max=20
+     vus_max........................: 20     min=20     max=20

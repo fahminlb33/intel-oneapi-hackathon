@@ -19,7 +19,8 @@ services:
       - inference_api
     environment:
       - PORT=8002
-      - API_HOST=http://inference_api:9001
       - MODEL_NAME=challenge2
+      - REST_API_HOST=http://inference_api:9001
+      - GRPC_API_HOST=inference_api:9000
     ports:
       - 8002:8002
