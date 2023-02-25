@@ -23,6 +23,10 @@ $ docker-compose up
 
 After the all the container are running, you can open http://localhost:8000 to visit the app homepage.
 
+### Postman Collection
+
+You can access the Postman collection [here](./kodesiana.postman_collection.json). Don't forget you need a running server before using this API collection.
+
 ## License
 
 Licensed under Apache License 2.0

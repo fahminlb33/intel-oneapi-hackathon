@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "3849ee00-87be-46b0-93ff-feea3d13ae44",
+		"name": "Kodesiana Intel oneAPI Hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Predict Weed from Crops",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/fahmi/Desktop/asdsadsad/agri_0_39.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8002/predict",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Predict Freshwater Quality",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"single\": [\r\n        7.258203145845717,\r\n        6.107129837217062e-09,\r\n        9.26167580122401,\r\n        182.2423407530417,\r\n        4.3998520479124295e-224,\r\n        0.4164775464847408,\r\n        2,\r\n        0.0478031791644083,\r\n        1.0161962374839366,\r\n        0.2980934209430296,\r\n        3.1441986515867457,\r\n        114.55142662349748,\r\n        160.06255735415195,\r\n        2.3250939237169903,\r\n        6.020679600903066e-16,\r\n        214.5531038247008,\r\n        1,\r\n        15.891904856714174,\r\n        61.13914033047329,\r\n        1,\r\n        11.0,\r\n        4.0\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/predict",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
