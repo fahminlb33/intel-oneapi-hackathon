@@ -35,9 +35,10 @@ services:
       - inference_api
     environment:
       - PORT=8002
-      - API_HOST=http://inference_api:9001
-      - MODEL_NAME=challenge2
       - SHOW_APP_MENU=true
+      - MODEL_NAME=challenge2
+      - REST_API_HOST=http://inference_api:9001
+      - GRPC_API_HOST=inference_api:9000
     healthcheck:
       test: ["CMD", "curl", "-f", "http://cropweed_app_web:8002"]
       interval: 30s
